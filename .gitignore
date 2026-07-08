@@ -1,0 +1,5 @@
+/uploads/
+/config/db_connect.php
+.env
+Thumbs.db
+.DS_Store
