@@ -6,8 +6,9 @@ require_once '../config/db_connect.php';
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $category = isset($_GET['category']) ? trim($_GET['category']) : '';
 
-$sql = "SELECT items.*, users.username FROM items 
-        JOIN users ON items.user_id = users.id WHERE 1=1";
+// FIXED: users.name instead of users.username
+$sql = "SELECT items.*, users.name as username FROM items 
+        LEFT JOIN users ON items.user_id = users.id WHERE 1=1";
 
 $params = [];
 $types = "";
@@ -21,8 +22,9 @@ if (!empty($search)) {
     $types .= "sss";
 }
 
+// FIXED: items.type instead of items.category
 if (!empty($category) && in_array($category, ['lost', 'found'])) {
-    $sql .= " AND items.category = ?";
+    $sql .= " AND items.type = ?";
     $params[] = $category;
     $types .= "s";
 }
@@ -30,6 +32,12 @@ if (!empty($category) && in_array($category, ['lost', 'found'])) {
 $sql .= " ORDER BY items.created_at DESC";
 
 $stmt = $conn->prepare($sql);
+
+// ✅ Error handling para makita kung may mali sa SQL
+if (!$stmt) {
+    die("SQL Prepare Error: " . $conn->error);
+}
+
 if (!empty($params)) {
     $stmt->bind_param($types, ...$params);
 }
@@ -62,8 +70,9 @@ $items = $result->fetch_all(MYSQLI_ASSOC);
         <?php foreach ($items as $item): ?>
             <a href="item_details.php?id=<?php echo $item['id']; ?>" class="item-card">
                 <div class="item-card-image">
-                    <?php if (!empty($item['image_path'])): ?>
-                        <img src="../<?php echo htmlspecialchars($item['image_path']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
+                    <!-- FIXED: image_url instead of image_path -->
+                    <?php if (!empty($item['image_url'])): ?>
+                        <img src="../<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
                     <?php else: ?>
                         📦
                     <?php endif; ?>
@@ -71,12 +80,15 @@ $items = $result->fetch_all(MYSQLI_ASSOC);
                 <div class="item-card-body">
                     <h3><?php echo htmlspecialchars($item['title']); ?></h3>
                     <p>📍 <?php echo htmlspecialchars($item['location']); ?></p>
-                    <p>📅 <?php echo date('M d, Y', strtotime($item['date_reported'])); ?></p>
+                    <!-- FIXED: created_at instead of date_reported -->
+                    <p>📅 <?php echo date('M d, Y', strtotime($item['created_at'])); ?></p>
                     <p>👤 <?php echo htmlspecialchars($item['username']); ?></p>
-                    <span class="item-badge badge-<?php echo $item['category']; ?>">
-                        <?php echo ucfirst($item['category']); ?>
+                    <!-- FIXED: type instead of category -->
+                    <span class="item-badge badge-<?php echo $item['type']; ?>">
+                        <?php echo ucfirst($item['type']); ?>
                     </span>
-                    <?php if ($item['status'] == 'claimed'): ?>
+                    <!-- FIXED: claim_status instead of status -->
+                    <?php if ($item['claim_status'] == 'claimed'): ?>
                         <span class="item-badge badge-claimed">Claimed</span>
                     <?php endif; ?>
                 </div>
