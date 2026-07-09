@@ -1,0 +1,345 @@
+/* assets/css/profile.css */
+
+/* --- General Container Styles --- */
+.details-container, .profile-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Item Details Card Styles --- */
+.details-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    padding: 30px;
+}
+
+.details-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.info-header h1 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 28px;
+}
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-lost {
+    background-color: #ffebee;
+    color: #e74c3c;
+}
+
+.badge-found {
+    background-color: #e8f5e9;
+    color: #27ae60;
+}
+
+.info-meta p {
+    margin: 10px 0;
+    color: #555;
+    font-size: 15px;
+}
+
+.info-description {
+    margin-top: 25px;
+}
+
+.info-description h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.info-description p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.info-status {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-label {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.status-value {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status-value.claimed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-value.unclaimed {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.action-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-claim, .btn-contact {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-claim {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.btn-claim:hover {
+    background-color: #27ae60;
+}
+
+.btn-contact {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-contact:hover {
+    background-color: #2980b9;
+}
+
+.error-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* --- User Profile Styles --- */
+.user-info-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.user-avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #3498db;
+}
+
+.user-details h1 {
+    margin: 0 0 5px 0;
+    color: #2c3e50;
+    font-size: 32px;
+}
+
+.user-email {
+    margin: 0 0 10px 0;
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+.user-role {
+    margin: 0;
+    color: #95a5a6;
+    font-size: 14px;
+}
+
+.reports-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.reports-table-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    overflow-x: auto;
+}
+
+.reports-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reports-table thead {
+    background-color: #f8f9fa;
+}
+
+.reports-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.reports-table td {
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.reports-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.report-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.item-link {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.item-link:hover {
+    text-decoration: underline;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-unclaimed {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-claimed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.btn-mark-claimed {
+    padding: 6px 12px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-mark-claimed:hover {
+    background-color: #27ae60;
+}
+
+.claimed-text {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.empty-reports {
+    background: white;
+    padding: 60px 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.empty-reports p {
+    color: #7f8c8d;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn-report-now {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-report-now:hover {
+    background-color: #2980b9;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .details-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .details-image img {
+        height: 250px;
+    }
+
+    .user-info-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}

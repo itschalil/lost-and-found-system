@@ -78,6 +78,9 @@ include '../includes/header.php';
 <script src="../assets/js/form_validation.js"></script>
 
 <?php 
-$conn->close();
+// Ensure the database connection is closed if it was initialized
+if (isset($conn)) {
+    $conn->close();
+}
 include '../includes/footer.php'; 
 ?>
