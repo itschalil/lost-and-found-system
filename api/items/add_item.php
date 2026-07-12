@@ -85,9 +85,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
     
-    // Insert into database
-    $stmt = $conn->prepare("INSERT INTO items (user_id, title, description, location, image_url, type, approval_status, claim_status, created_at) 
-                            VALUES (?, ?, ?, ?, ?, ?, 'pending', 'unclaimed', NOW())");
+    // ✅ FIXED: Insert into database with error handling
+    $sql = "INSERT INTO items (user_id, title, description, location, image_url, type, approval_status, claim_status, created_at) 
+            VALUES (?, ?, ?, ?, ?, ?, 'pending', 'unclaimed', NOW())";
+            
+    $stmt = $conn->prepare($sql);
+    
+    // Debugging: Check if prepare failed
+    if (!$stmt) {
+        error_log("MySQL Prepare Error: " . $conn->error);
+        $_SESSION['error'] = 'Database error: ' . $conn->error;
+        header("Location: ../../pages/report_item.php");
+        exit();
+    }
+    
+    // Bind parameters
     $stmt->bind_param("isssss", $userId, $title, $description, $location, $imagePath, $itemType);
     
     if ($stmt->execute()) {
@@ -95,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../../pages/profile.php");
         exit();
     } else {
-        $_SESSION['error'] = 'Failed to submit report. Please try again.';
+        $_SESSION['error'] = 'Failed to submit report: ' . $stmt->error;
         header("Location: ../../pages/report_item.php");
         exit();
     }
